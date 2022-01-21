@@ -6,8 +6,8 @@ namespace SharpEval
 {
     public class Parser
     {
-        private readonly string _unaryOperators = "!";
-        private readonly string _binaryOperators = "+-*^/%";
+        private static readonly string _unaryOperators = "!";
+        private static readonly string _binaryOperators = "+-*^/%";
         private readonly string _toParse;
 //        private List<IExpression> _expressions;
         private IExpression _expression;
@@ -18,19 +18,12 @@ namespace SharpEval
             _expression = Analyse(_toParse);
         }
 
-        private string join(string[] splitted, int start, int end)
+        public static double parse(string expression)
         {
-            StringBuilder sb = new StringBuilder();
-            
-            for (int i = start; i < end; i++)
-            {
-                sb.Append(splitted[i]);
-            }
-
-            return sb.ToString();
+            return Analyse(expression).Resolve();
         }
         
-        private IExpression Analyse(string toParse)
+        private static IExpression Analyse(string toParse)
         {
             List<string> operators = new List<string>();
             List<Double> operands = new List<double>();
