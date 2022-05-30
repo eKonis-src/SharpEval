@@ -30,6 +30,8 @@ namespace SharpEval
             {
                 case "!":
                     return new UnaryExpression(left, Factorial);
+                case "n":
+                    return new UnaryExpression(left, Negative);
                 default:
                     throw new Exception("Unknown operator");
             }
@@ -39,11 +41,16 @@ namespace SharpEval
         {
             double r = 1;
             int s = (int) a;
-            for (int i = 1; i < s; i++)
+            for (int i = 1; i <= s; i++)
             {
                 r *= i;
             }
             return r;
+        }
+
+        private static double Negative(double a)
+        {
+            return -a;
         }
         
         private static double Power(double a, double b)
