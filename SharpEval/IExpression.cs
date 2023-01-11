@@ -1,5 +1,3 @@
-using System;
-
 namespace SharpEval
 {
     public interface IExpression

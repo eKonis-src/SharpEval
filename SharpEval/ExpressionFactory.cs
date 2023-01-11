@@ -1,7 +1,7 @@
 using System;
 namespace SharpEval
 {
-    public class ExpressionFactory
+    public static class ExpressionFactory
     {
         public static IExpression BinaryExpressionGenerator(string op, IExpression left, IExpression right)
         {

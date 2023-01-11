@@ -1,25 +1,14 @@
-using System;
+using System.Linq;
 using System.Text;
 
 namespace SharpEval
 {
-    public class StringUtils
+    public static class StringUtils
     {
-        private static readonly String UnaryOperators = "!n";
-        private static readonly String BinaryOperators = "+-*^/%";
-        private static readonly string Numerics = "0123456789.,";
+        private const string UnaryOperators = "!n";
+        private const string BinaryOperators = "+-*^/%";
+        private const string Numerics = "0123456789.,";
         
-        
-        private static bool Contains(string s, char c)
-        {
-            foreach (char ch in s)
-            {
-                if (ch == c)
-                    return true;
-            }
-            return false;
-        }
-
         public static string FormatInput(string input)
         {
             StringBuilder sb = new StringBuilder(" ");
@@ -27,16 +16,16 @@ namespace SharpEval
             while (i < input.Length)
             {
                 char c = input[i];
-                if (Contains(UnaryOperators, c) || Contains(BinaryOperators, c) || c == '(' || c == ')')
+                if (UnaryOperators.Contains(c) || BinaryOperators.Contains(c) || c == '(' || c == ')')
                 {
                     sb.Append(c);
                     sb.Append(" ");
                 }
 
-                if (Contains(Numerics, input[i]))
+                if (Numerics.Contains(input[i]))
                 {
                     int j = i;
-                    while (i < input.Length && Contains(Numerics, input[i]))
+                    while (i < input.Length && Numerics.Contains(input[i]))
                     {
                         i++;
                     }

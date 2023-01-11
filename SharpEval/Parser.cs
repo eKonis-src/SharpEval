@@ -1,22 +1,12 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace SharpEval
 {
-    public class Parser
+    public static class Parser
     {
         private static readonly string UnaryOperators = "!n";
         private static readonly string BinaryOperators = "+-*^/%";
-        private readonly string _toParse;
-//        private List<IExpression> _expressions;
-        private IExpression _expression;
-
-        public Parser(string toParse)
-        {
-            _toParse = StringUtils.FormatInput(toParse);
-            _expression = Analyse(_toParse);
-        }
 
         public static double Parse(string expression)
         {
@@ -34,7 +24,7 @@ namespace SharpEval
             operators.Insert(i, op);
         }
 
-        private static void checkPrio(List<string> operators, List<IExpression> operands)
+        private static void CheckPriority(List<string> operators, List<IExpression> operands)
         {
             if (operators.Count == 0)
                 return;
@@ -51,9 +41,8 @@ namespace SharpEval
         {
             //IExpression expression;
             int depth = 0;
-            List<List<string>> operators = new List<List<string>>();
-            operators.Add(new List<string>());
-            List<IExpression> operands = new List<IExpression>();
+            var operators = new List<List<string>> { new List<string>() };
+            var operands = new List<IExpression>();
             foreach (string s in toParse.Split(' '))
             {
                 if ("(".Contains(s))
@@ -66,7 +55,7 @@ namespace SharpEval
                 {
                     Unstack(operators[depth],operands);
                     depth--;
-                    checkPrio(operators[depth],operands);
+                    CheckPriority(operators[depth],operands);
 
                 }
                 if (BinaryOperators.Contains(s) || UnaryOperators.Contains(s))
@@ -78,7 +67,7 @@ namespace SharpEval
                 else if (!"()".Contains(s))
                 {
                     operands.Insert(0,new Number(Double.Parse(s)));
-                    checkPrio(operators[depth],operands);
+                    CheckPriority(operators[depth],operands);
                 }
             }
             if (depth != 0)
@@ -107,9 +96,5 @@ namespace SharpEval
                 operators.RemoveAt(0);
             }
         }
-
-        public string ToParse => _toParse;
-
-        public double Val => _expression.Resolve();
     }
 }
