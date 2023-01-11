@@ -9,32 +9,7 @@ namespace SharpEval
         private static readonly String BinaryOperators = "+-*^/%";
         private static readonly string Numerics = "0123456789.,";
         
-        public static string InParenthesis(string s)
-        {
-            int start = 0;
-            int c = 0;
-            int end = s.Length;
-            for (int i = 0; i < s.Length; i++)
-            {
-                switch (s[i])
-                {
-                    case '(': 
-                        if (c == 0)
-                            start = i;
-                        c++;
-                        break;
-                    case ')':
-                        c--;
-                        if (c == 0)
-                            end = i;
-                        break;
-                }
-            }
-            if (c == 0)
-                return s.Substring(start + 1, end - start - 1).Trim(' ');
-            throw new Exception("Incorrect Parenthesis");
-        }
-
+        
         private static bool Contains(string s, char c)
         {
             foreach (char ch in s)

@@ -49,7 +49,6 @@ namespace SharpEval
         
         private static IExpression Analyse(string toParse)
         {
-            Console.Write(toParse + "\n");
             //IExpression expression;
             int depth = 0;
             List<List<string>> operators = new List<List<string>>();
@@ -100,15 +99,11 @@ namespace SharpEval
                     var a = operands[0];
                     operands.RemoveAt(0);
                     operands.Insert(0,ExpressionFactory.BinaryExpressionGenerator(operators[0],a,b));
-                    Console.Write(a.Resolve() + " "+operators[0]+" " + b.Resolve() +"\n");
                 }
                 else
                 {
-                    Console.Write(operators[0]+" " + b.Resolve() +"\n");
                     operands.Insert(0,ExpressionFactory.UnaryExpressionGenerator(operators[0],b));
                 }
-                Console.Write(operands[0].Resolve());
-                Console.Write("\n");
                 operators.RemoveAt(0);
             }
         }
