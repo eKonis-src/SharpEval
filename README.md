@@ -1,4 +1,4 @@
-# SharpEval V1
+# SharpEval V1.5
 C# Expression parsing and evaluation<br>
 How to use
 ```C#
