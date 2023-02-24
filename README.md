@@ -13,6 +13,7 @@ Parser.AddOperator(char op, Func<double, double>, bool primary);
 #Binary Operators
 Parser.AddOperator(char op, Func<double, double, double>, bool primary);
 ```
+The primary boolean gives the operator a priority equal to the multiplication one.
 
 ## New : Custom operators can now be added to the parser<br>
 
