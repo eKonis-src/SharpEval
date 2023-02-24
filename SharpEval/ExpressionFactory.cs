@@ -24,6 +24,16 @@ namespace SharpEval
             }
         }
 
+        public static IExpression UnaryExpressionGenerator(Func<double, double> fun, IExpression left)
+        {
+            return new UnaryExpression(left, fun);
+        }
+
+        public static IExpression BinaryExpressionGenerator(Func<double, double, double> fun, IExpression left,
+            IExpression right)
+        {
+            return new BinaryExpression(left, right, fun);
+        }
         public static IExpression UnaryExpressionGenerator(string op, IExpression left)
         {
             switch (op)

@@ -9,14 +9,14 @@ namespace SharpEval
         private const string BinaryOperators = "+-*^/%";
         private const string Numerics = "0123456789.,";
         
-        public static string FormatInput(string input)
+        public static string FormatInput(string input, string customOp)
         {
             StringBuilder sb = new StringBuilder(" ");
             int i = 0;
             while (i < input.Length)
             {
                 char c = input[i];
-                if (UnaryOperators.Contains(c) || BinaryOperators.Contains(c) || c == '(' || c == ')')
+                if (UnaryOperators.Contains(c) || BinaryOperators.Contains(c) || customOp.Contains(c) || c == '(' || c == ')')
                 {
                     sb.Append(c);
                     sb.Append(" ");
